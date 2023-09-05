@@ -2,9 +2,7 @@
 
 echo "your commit :"
 read var
-echo "your file name:"
-read var2
-chmod u+x "${var2}"
+
 git add .
 git commit -m "${var}"
 git push
