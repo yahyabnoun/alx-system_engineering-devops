@@ -1,3 +1,2 @@
 #!/bin/bash
 (echo "ibase=water; $WATER + ibase=stir; $STIR"; echo "obase=bestchol") | tr -d '\n' | bc
-
