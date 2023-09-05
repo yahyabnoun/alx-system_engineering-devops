@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "ibase=water; $WATER + ibase=stir; $STIR" | bc -l | xargs -I{} -d '\n' echo "obase=bestchol; {}" | bc
+(echo "ibase=water; $WATER + ibase=stir; $STIR"; echo "obase=bestchol") | tr -d '\n' | bc
+
