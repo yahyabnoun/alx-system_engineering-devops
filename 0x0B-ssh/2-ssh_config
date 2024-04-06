@@ -1,3 +1,5 @@
-#!/usr/bin/env bash
+# ssh config file
+Host *
+      PasswordAuthentication no
+      IdentifyFile ~/.ssh/school
 
-ssh -v ubuntu@54.236.16.250
