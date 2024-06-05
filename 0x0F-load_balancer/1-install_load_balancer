@@ -1,40 +1,23 @@
 #!/usr/bin/env bash
 # Installs and setup haproxy
 
-sudo apt-get update
-sudo apt install haproxy
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-1.8
+apt-get -y update
+apt-get install -y haproxy=1.8.\*
 
-server_config=\
-"
-defaults
-  mode http
-  timeout client 15s
-  timeout connect 10s
-  timeout server 15s
-  timeout http-request 10s
+echo "ENABLED=1" > /etc/default/haproxy
 
-frontend yahyabn-tech-frontend
-    bind *:80
-    default_backend yahyabn-tech-backend
+# Listen to web1 and web2 servers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+echo "
+   listen load_balancer
+   bind *:80
+   mode http
+   balance roundrobin
+   option httpclose
+   option forwardfor
+   server 520514-web-01 54.166.81.116:80 check
+   server 520514-web-02 3.90.82.143:80 check
+" >> /etc/haproxy/haproxy.cfg
 
-backend yahyabn-tech-backend
-    balance roundrobin
-    server 520514-web-01 54.166.81.116:80 check
-    server 520514-web-02 3.90.82.143:80 check
-"
-
-sudo echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
-
-sudo echo "ENABLED=1" | sudo dd status=none of=/etc/default/haproxy
-
-echo "configured - Roundrobin On web-01 & web-02"
-
-if [ "$(pgrep -c haproxy)" -le 0 ]; then
-	sudo service haproxy start
-else
-	sudo service haproxy restart
-fi
-
-echo -e "web-01 web-02"
-
-
+service haproxy start
