@@ -25,3 +25,5 @@ backend yahyabn-tech-backend
     server 520514-web-02 3.90.82.143:80 check
 " > /etc/haproxy/haproxy.cfg
 
+service haproxy start
+
