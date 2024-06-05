@@ -4,10 +4,10 @@
 sudo apt-get update
 sudo apt install haproxy
 
-echo "ENABLED=1" > /etc/default/haproxy
+sudo echo "ENABLED=1" > /etc/default/haproxy
 
 
-echo "
+sudo echo "
 defaults
   mode http
   timeout client 15s
@@ -25,5 +25,5 @@ backend yahyabn-tech-backend
     server 520514-web-02 3.90.82.143:80 check
 " > /etc/haproxy/haproxy.cfg
 
-service haproxy start
+sudo service haproxy start
 
