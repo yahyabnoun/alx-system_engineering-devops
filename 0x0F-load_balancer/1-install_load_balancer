@@ -4,7 +4,7 @@
 sudo apt-get -y update
 sudo apt install -y haproxy
 
-sudo echo
+server_config=\
 "
 defaults
   mode http
@@ -21,9 +21,11 @@ backend yahyabn-tech-backend
     balance roundrobin
     server 520514-web-01 54.166.81.116:80 check
     server 520514-web-02 3.90.82.143:80 check
-"  > /etc/haproxy/haproxy.cfg
+"
 
-sudo echo "ENABLED=1" > /etc/default/haproxy
+sudo echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
+
+sudo echo "ENABLED=1" | sudo dd status=none of=/etc/default/haproxy
 
 service haproxy start
 
