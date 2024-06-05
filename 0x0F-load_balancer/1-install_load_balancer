@@ -13,11 +13,11 @@ defaults
   timeout server 15s
   timeout http-request 10s
 
-frontend clickviral-tech-frontend
+frontend yahyabn-tech-frontend
     bind *:80
-    default_backend clickviral-tech-backend
+    default_backend yahyabn-tech-backend
 
-backend clickviral-tech-backend
+backend yahyabn-tech-backend
     balance roundrobin
     server 520514-web-01 54.166.81.116:80 check
     server 520514-web-02 3.90.82.143:80 check
@@ -26,9 +26,5 @@ echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
 
 echo "ENABLED=1" | sudo dd status=none of=/etc/default/haproxy
 
-if [ "$(pgrep -c haproxy)" -le 0 ]; then
-	sudo service haproxy start
-else
-	sudo service haproxy restart
-fi
+sudo service haproxy start
 
