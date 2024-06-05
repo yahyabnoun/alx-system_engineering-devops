@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Installs and setup haproxy
+
+sudo apt-get update
+sudo apt install haproxy
+
+echo "ENABLED=1" > /etc/default/haproxy
+
+
+echo "
+defaults
+  mode http
+  timeout client 15s
+  timeout connect 10s
+  timeout server 15s
+  timeout http-request 10s
+
+frontend yahyabn-tech-frontend
+    bind *:80
+    default_backend yahyabn-tech-backend
+
+backend yahyabn-tech-backend
+    balance roundrobin
+    server 520514-web-01 54.166.81.116:80 check
+    server 520514-web-02 3.90.82.143:80 check
+" > /etc/haproxy/haproxy.cfg
+
