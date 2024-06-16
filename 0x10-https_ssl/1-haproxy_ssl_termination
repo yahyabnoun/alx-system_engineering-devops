@@ -41,7 +41,7 @@ frontend yahyabn-tech-frontend
         default_backend yahyabn-tech-backend
 
 frontend yahyabn-tech-frontend-https
-        bind *:443 ssl crt /etc/haproxy/certs/www.yahyabn-tech.tech.pem
+        bind *:443 ssl crt /etc/haproxy/certs/yahyabn.tech.pem
         http-request set-header X-Forwarded-Proto https
         default_backend yahyabn-tech-backend
 
